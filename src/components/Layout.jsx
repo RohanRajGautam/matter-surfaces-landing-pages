@@ -1,20 +1,18 @@
 /* eslint no-unused-expressions: 0 */
 /* eslint react/destructuring-assignment: 0 */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { StaticQuery, graphql } from 'gatsby'
-import { Global, css } from '@emotion/core'
-import { ThemeProvider } from 'emotion-theming'
-import '@reach/skip-nav/styles.css'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { ThemeProvider, Global, css } from '@emotion/react';
+import '@reach/skip-nav/styles.css';
 
-import Footer from './Footer'
-import SEO from './SEO'
-import SkipNavLink from './SkipNavLink'
-import { theme, reset } from '../styles'
+import Header from './Header';
+import Footer from './Footer';
+import SEO from './SEO';
+import { theme, reset } from '../styles';
 
-import 'typeface-lora'
-import 'typeface-source-sans-pro'
+import 'typeface-lora';
+import 'typeface-source-sans-pro';
 
 const globalStyle = css`
   ${reset}
@@ -26,7 +24,7 @@ const globalStyle = css`
     -moz-osx-font-smoothing: grayscale;
   }
   body {
-    color: ${theme.colors.greyDarker};
+    color: ${theme.colors.darkBlue};
     background-color: ${theme.colors.bg};
   }
   ::selection {
@@ -39,10 +37,6 @@ const globalStyle = css`
     text-decoration: none;
     font-weight: 700;
     font-style: italic;
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
   }
   @media (max-width: ${theme.breakpoints.m}) {
     html {
@@ -60,7 +54,7 @@ const globalStyle = css`
       font-size: 1.333rem !important;
     }
     h4 {
-      font-size: 1rem !important;
+      font-size: 1rem;
     }
     h5 {
       font-size: 0.75rem !important;
@@ -69,59 +63,39 @@ const globalStyle = css`
       font-size: 0.563rem !important;
     }
   }
-`
+`;
 
 const PureLayout = ({ children, data, customSEO }) => (
   <ThemeProvider theme={theme}>
-    <>
-      <Global styles={globalStyle} />
-      <SkipNavLink />
-      {!customSEO && <SEO />}
-      {children}
-      <Footer>
-        <div dangerouslySetInnerHTML={{ __html: data.prismicHomepage.data.footer.html }} />
-      </Footer>
-    </>
+    <Global styles={globalStyle} />
+    {!customSEO && <SEO />}
+    {children}
   </ThemeProvider>
-)
+);
 
 class Layout extends Component {
   render() {
     return (
-      <StaticQuery
-        query={graphql`
-          query LayoutQuery {
-            prismicHomepage {
-              data {
-                footer {
-                  html
-                }
-              }
-            }
-          }
-        `}
-        render={(data) => (
-          <PureLayout {...this.props} data={data}>
-            {this.props.children}
-          </PureLayout>
-        )}
-      />
-    )
+      <PureLayout {...this.props}>
+        <Header />
+        {this.props.children}
+        <Footer />
+      </PureLayout>
+    );
   }
 }
 
-export default Layout
+export default Layout;
 
 Layout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]).isRequired,
-}
+};
 
 PureLayout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]).isRequired,
-  data: PropTypes.object.isRequired,
   customSEO: PropTypes.bool,
-}
+};
 
 PureLayout.defaultProps = {
   customSEO: false,
-}
+};

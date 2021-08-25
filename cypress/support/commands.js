@@ -25,5 +25,5 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('assertRoute', (route) => {
-  cy.url().should('equal', `${window.location.origin}${route}`)
-})
+  cy.url().should('equal', `${window.location.origin}${route}`);
+});

@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: 'touch';
+  overflow: hidden;
+}
+
+body {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1b315f;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+}

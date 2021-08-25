@@ -8,8 +8,15 @@ const theme = {
     grey: '#595C62',
     greyDark: '#303643',
     greyDarker: '#1c252b',
+    lightBlue: '#E8F1f8',
+    mediumLightBlue: '#7baacf',
+    mediumBlue: '#337BB5',
+    darkBlue: '#1b325f',
+    lighterBlue: '#8DB0CD',
+    white: '#ffffff',
+    orange: '#da6147',
   },
-  maxWidth: '1000px',
+  maxWidth: '1080px',
   maxWidthText: '720px',
   breakpoints: {
     xs: '400px',
@@ -17,6 +24,6 @@ const theme = {
     m: '900px',
     l: '1200px',
   },
-}
+};
 
-export default theme
+export default theme;

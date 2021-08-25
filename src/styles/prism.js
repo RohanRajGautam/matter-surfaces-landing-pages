@@ -1,11 +1,12 @@
-import { css } from '@emotion/core'
+import { css } from '@emotion/react';
 
 const prism = css`
   code[class*='language-'],
   pre[class*='language-'] {
-    font-family: Consolas, Menlo, Monaco, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter',
-      'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', 'Courier New', Courier,
-      monospace;
+    font-family: Consolas, Menlo, Monaco, 'Andale Mono WT', 'Andale Mono',
+      'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono',
+      'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L',
+      'Courier New', Courier, monospace;
     font-size: 14px;
     line-height: 1.375;
     direction: ltr;
@@ -157,6 +158,6 @@ const prism = css`
   .line-numbers-rows > span:before {
     color: #979db4;
   }
-`
+`;
 
-export default prism
+export default prism;

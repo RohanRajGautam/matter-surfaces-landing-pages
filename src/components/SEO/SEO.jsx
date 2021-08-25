@@ -1,14 +1,14 @@
-import React from 'react'
-import { Helmet } from 'react-helmet'
-import PropTypes from 'prop-types'
-import { useStaticQuery, graphql } from 'gatsby'
-import Facebook from './Facebook'
-import Twitter from './Twitter'
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import PropTypes from 'prop-types';
+import { useStaticQuery, graphql } from 'gatsby';
+import Facebook from './Facebook';
+import Twitter from './Twitter';
 
 // Complete tutorial: https://www.gatsbyjs.org/docs/add-seo-component/
 
 const SEO = ({ title, desc, banner, pathname, article, node }) => {
-  const { site } = useStaticQuery(query)
+  const { site } = useStaticQuery(query);
 
   const {
     buildTime,
@@ -24,14 +24,14 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
       twitter,
       facebook,
     },
-  } = site
+  } = site;
 
   const seo = {
     title: title || defaultTitle,
     description: desc || defaultDescription,
     image: `${siteUrl}${banner || defaultBanner}`,
     url: `${siteUrl}${pathname || ''}`,
-  }
+  };
 
   // schema.org in JSONLD format
   // https://developers.google.com/search/docs/guides/intro-structured-data
@@ -69,7 +69,7 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
       '@type': 'ImageObject',
       url: `${siteUrl}${defaultBanner}`,
     },
-  }
+  };
 
   // Initial breadcrumb list
 
@@ -82,9 +82,9 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
       },
       position: 1,
     },
-  ]
+  ];
 
-  let schemaArticle = null
+  let schemaArticle = null;
 
   if (article) {
     schemaArticle = {
@@ -123,7 +123,7 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
         url: seo.image,
       },
       mainEntityOfPage: seo.url,
-    }
+    };
     // Push current blogpost into breadcrumb list
     itemListElement.push({
       '@type': 'ListItem',
@@ -132,7 +132,7 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
         name: seo.title,
       },
       position: 2,
-    })
+    });
   }
 
   const breadcrumb = {
@@ -141,7 +141,7 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
     description: 'Breadcrumbs list',
     name: 'Breadcrumbs',
     itemListElement,
-  }
+  };
 
   return (
     <>
@@ -151,8 +151,14 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
         <meta name="image" content={seo.image} />
         <meta name="gatsby-starter" content="Gatsby Starter Prismic" />
         {/* Insert schema.org data conditionally (webpage/article) + everytime (breadcrumbs) */}
-        {!article && <script type="application/ld+json">{JSON.stringify(schemaOrgWebPage)}</script>}
-        {article && <script type="application/ld+json">{JSON.stringify(schemaArticle)}</script>}
+        {!article &&
+          `<script type="application/ld+json">
+            {JSON.stringify(schemaOrgWebPage)}
+          </script>`}
+        {article &&
+          `<script type="application/ld+json">
+            {JSON.stringify(schemaArticle)}
+          </script>`}
         <script type="application/ld+json">{JSON.stringify(breadcrumb)}</script>
       </Helmet>
       <Facebook
@@ -166,10 +172,10 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
       />
       <Twitter title={seo.title} image={seo.image} desc={seo.description} username={twitter} />
     </>
-  )
-}
+  );
+};
 
-export default SEO
+export default SEO;
 
 SEO.propTypes = {
   title: PropTypes.string,
@@ -178,7 +184,7 @@ SEO.propTypes = {
   pathname: PropTypes.string,
   article: PropTypes.bool,
   node: PropTypes.object,
-}
+};
 
 SEO.defaultProps = {
   title: null,
@@ -187,7 +193,7 @@ SEO.defaultProps = {
   pathname: null,
   article: false,
   node: null,
-}
+};
 
 const query = graphql`
   query SEO {
@@ -207,4 +213,4 @@ const query = graphql`
       }
     }
   }
-`
+`;
